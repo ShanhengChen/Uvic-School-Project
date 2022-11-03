@@ -1,4 +1,4 @@
-# Seng265-spring-2022
+# Seng265-spring-2022 Overall Score: A
 
 Seng265-spring-2022 directory contains all assignments that done within the class.
 
