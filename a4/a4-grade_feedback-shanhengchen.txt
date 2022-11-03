@@ -1,0 +1,38 @@
+SENG 265 -- SPRING 2022
+ASSIGNMENT #4 EVALUATION
+========================
+
+Student name:   Simon Chen
+Student number: V00946075
+Student login:  shanhengchen
+
+-----
+(1) Required files submitted, placed, and named appropriately; code runs
+without errors or warnings.
+
+- Yes, the submitted files are correct, and the code
+  runs successfully without errors or warnings.
+
+-----
+(2) Multiple images generated (and further comments)
+
+- Yes, art images generated are random.
+
+-----
+(3) Code formatting and structure (i.e., use of type hints):
+
+Positive aspects:
+
+- The code makes use of type hints that facilitate readability and 
+  potential maintainability.
+
+-----
+
+PART 1 MARKS: 100
+
+PART 2 MARKS: 100
+
+PART 3 MARKS: 100
+
+-----
+A4 MARKS: 100
