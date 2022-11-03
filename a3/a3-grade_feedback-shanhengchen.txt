@@ -1,0 +1,37 @@
+SENG 265 -- SPRING 2022
+ASSIGNMENT #3 EVALUATION
+========================
+
+Student name:   Simon Chen
+Student number: V00946075
+Student login:  shanhengchen
+
+-----
+(1) A#3 files submitted and named appropriately; compiles and runs
+without errors or warnings.
+
+- Yes, the submitted files are correct, but the code
+  compiles or runs with warnings or errors.
+
+
+-----
+(2) Tests passed (and further comments)
+
+- All tests passed. Great work.
+
+-----
+(3) Code formatting and structure:
+
+Positive aspects:
+
+Improvement opportunities:
+
+- Good formatting and structure of the code that facilitates reading
+  and understanding.
+
+- Good naming conventions for functions and variables.
+
+-----
+
+GRADE: A
+MARKS: 89 
