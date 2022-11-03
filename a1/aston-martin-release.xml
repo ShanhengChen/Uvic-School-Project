@@ -1,0 +1,13 @@
+<calendar>
+    <event>
+        <description>Aston Martin F1 2022 Car Release</description>
+        <timezone>GMT-8</timezone>
+        <location>Online</location>
+        <day>10</day>
+        <month>02</month>
+        <year>2022</year>
+        <dweek>Thursday</dweek>
+        <start>11:00</start>
+        <end>13:00</end>
+    </event>
+</calendar>
