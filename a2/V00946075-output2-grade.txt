@@ -1,0 +1,60 @@
+test_converter (__main__.TestCase1) ... ok
+test_converter (__main__.TestCase10) ... ok
+test_converter (__main__.TestCase11) ... ok
+test_converter (__main__.TestCase12) ... ok
+test_converter (__main__.TestCase13) ... ok
+test_converter (__main__.TestCase14) ... ok
+test_converter (__main__.TestCase15) ... ok
+test_converter (__main__.TestCase16) ... ok
+test_converter (__main__.TestCase17) ... ok
+test_converter (__main__.TestCase18) ... ok
+test_converter (__main__.TestCase19) ... FAIL
+test_converter (__main__.TestCase2) ... ok
+test_converter (__main__.TestCase20) ... FAIL
+test_converter (__main__.TestCase3) ... ok
+test_converter (__main__.TestCase4) ... ok
+test_converter (__main__.TestCase5) ... ok
+test_converter (__main__.TestCase6) ... ok
+test_converter (__main__.TestCase7) ... ok
+test_converter (__main__.TestCase8) ... ok
+test_converter (__main__.TestCase9) ... ok
+test_converter (__main__.TestCaseB1) ... FAIL
+test_converter (__main__.TestCaseB2) ... FAIL
+test_equal_db (__main__.TestEquality) ... ok
+
+======================================================================
+FAIL: test_converter (__main__.TestCase19)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "~/repos/CSC370/2022_05-08/A21-submissions/10810-92895 - V00946075 - Simon Chen - Jun 15, 2022 311 PM/tests.py", line 495, in test_converter
+    self.assertEqual( db19, wrap_student_call(convert_to_table, erd19 ) )
+AssertionError: <table.Database object at 0x7f90e014a7a0> != <table.Database object at 0x7f90e0149fc0>
+
+======================================================================
+FAIL: test_converter (__main__.TestCase20)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "~/repos/CSC370/2022_05-08/A21-submissions/10810-92895 - V00946075 - Simon Chen - Jun 15, 2022 311 PM/tests.py", line 538, in test_converter
+    self.assertTrue( db20a == actual_result or db20b == actual_result or db20c == actual_result or db20d == actual_result, \
+AssertionError: False is not true : actual result matches one of four possible correct orderings
+
+======================================================================
+FAIL: test_converter (__main__.TestCaseB1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "~/repos/CSC370/2022_05-08/A21-submissions/10810-92895 - V00946075 - Simon Chen - Jun 15, 2022 311 PM/tests.py", line 592, in test_converter
+    self.assertTrue( dbB1a == actual_result or dbB1b == actual_result or dbB1c == actual_result or dbB1d == actual_result, \
+AssertionError: False is not true : actual result matches one of four possible correct orderings
+
+======================================================================
+FAIL: test_converter (__main__.TestCaseB2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "~/repos/CSC370/2022_05-08/A21-submissions/10810-92895 - V00946075 - Simon Chen - Jun 15, 2022 311 PM/tests.py", line 613, in test_converter
+    self.assertEqual( dbB2, wrap_student_call(convert_to_table, erdB2 ) )
+AssertionError: <table.Database object at 0x7f90e01480a0> != <table.Database object at 0x7f90e0149cc0>
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.003s
+
+FAILED (failures=4)
