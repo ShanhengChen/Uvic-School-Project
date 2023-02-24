@@ -1,0 +1,161 @@
+void *clerk_entry(void * clerkNum){
+  while(Clerk_id == 0){usleep(1);}
+  pthread_mutex_lock(&c_lock);
+  while(true){
+  usleep(1);
+  //printf("\n--------------------------------\n");
+  if (tracker >= total_customer)
+  { break;
+}else{ 
+  printf("sending signal (clerk%d)\n",*((int *) clerkNum)); 
+  //printf("\n---------------- clerk%d quit----------------\n",*((int *) clerkNum)
+  track_c ++; // track send signal times
+  //makeprintf("The number of times the signal was sent %d\n",track_c);
+  if( track_c <= total_customer){
+  pthread_cond_broadcast(&convar);
+  //printf("tracker %d customer %d\n", tracker, total_customer);
+  queue_status[*((int *) clerkNum)] = -1;
+  pthread_cond_wait(&clerk_con,&c_lock);
+  }else{break;}
+  }  
+ }
+pthread_mutex_unlock(&c_lock);
+pthread_exit(NULL);
+return NULL;
+}
+
+
+
+void *clerk_entry(void * clerkNum){
+  usleep(1);
+  pthread_mutex_lock(&c_lock);
+  while(true){ //printf("\n--------------------------------\n");
+  while(Clerk_id == 0 && track_c < total_customer){usleep(1);} //等待知道有人来
+
+  if (tracker >= total_customer){break;} else{   //服务完所有人就退出
+  
+  if(track_c < total_customer){ // 控制发信号的次数
+
+  track_c ++;   
+  Clerk_id_start = *((int *) clerkNum);
+  printf("sending signal (clerk%d)\n",Clerk_id_start);
+  pthread_cond_broadcast(&convar);
+  Clerk_id --;
+  queue_status[Clerk_id_start] = -1;  //printf("tracker %d customer %d\n", tracker, total_customer);
+  printf("clerk%d wait for signal to   wake up\n",Clerk_id_start);
+  pthread_cond_wait(&clerk_con,&c_lock);
+  } 
+  
+  }
+}   
+pthread_mutex_unlock(&c_lock);
+pthread_exit(NULL);
+return NULL;
+}
+
+
+/*
+if (tracker >= total_customer || track_c > total_customer){break;} //makeprintf("The number of times the signal was sent %d\n",track_c);
+  Clerk_id_start = *((int *) clerkNum);
+  track_c ++;   
+  printf("sending signal (clerk%d)\n",Clerk_id_start); 
+  pthread_cond_broadcast(&convar);
+  Clerk_id --;
+  queue_status[Clerk_id_start] = -1;  //printf("tracker %d customer %d\n", tracker, total_customer);
+  pthread_cond_wait(&clerk_con,&c_lock);
+*/
+
+
+//---------------------------------------------------------------------------------
+
+void * customer_entry(void * cus_info){
+	struct customer_info * p_myInfo = (struct customer_info *) cus_info;
+  usleep(p_myInfo->arrival_time);
+  pthread_mutex_lock(&lock);
+  queue_Customer = enqueue(queue_Customer,p_myInfo->user_id,  p_myInfo->class_type+1);
+  printf("customer %d come in at %d\n", p_myInfo->user_id, p_myInfo->arrival_time);
+  counter ++;
+  Clerk_id ++;
+  for(int i = 0; i <NClerks; i++){
+    printf("\t%d ", queue_status[i]);}
+    printf("\n counter is %d\n", counter);
+  while(true){
+    //printf("A clerk starts serving a customer: start time %d clerk id %d\n",p_myInfo->arrival_time,Clerk_id);
+    pthread_cond_wait(&convar, &lock); 
+    if(p_myInfo->user_id == queue_Customer->id){
+      queue_Customer = dequeue(queue_Customer);
+      counter --; // queue length
+      tracker ++; // track how many customer is done
+      for(int i = 0; i <NClerks; i++){
+      if(queue_status[i] == -1){queue_status[i] = 1; recorder = i; }}
+      break;
+    }
+      }
+  usleep(p_myInfo->service_time);
+  printf("thread id %d is finished the serve by clerk %d return \n",p_myInfo->user_id,recorder);
+	pthread_mutex_unlock(&lock);
+  pthread_cond_signal(&clerk_con);
+  pthread_exit(NULL);
+	return((void *)0);
+  
+}
+
+--------------------------
+
+
+if(tracker == 5){
+          for(int i = 0; i <NClerks; i++){
+          if(queue_status[i] == -1){queue_status[i] = 1;}
+           tracker = 0;
+            Clerk_id --;}
+         }   
+
+------------------------------------------
+
+
+
+
+
+
+void * customer_entry(void * cus_info){ // control start serving time and queue
+	struct customer_info * p_myInfo = (struct customer_info *) cus_info;
+  usleep(p_myInfo->arrival_time*100000);
+  pthread_mutex_lock(&lock);
+  if (p_myInfo->class_type == 0){queue_esc = enqueue(queue_esc,p_myInfo->user_id, p_myInfo->class_type);}
+  else{queue_BUS = enqueue(queue_BUS,p_myInfo->user_id, p_myInfo->class_type);}
+  counter ++;
+  Clerk_id ++;
+  int check = 0;
+
+  while(Clerk_id >5){ // wait until someone serving customer is done
+    usleep(1);
+    if(Clerk_id<= 5){break;}}
+  
+
+  while(true){
+    if(queue_BUS != NULL){
+      cur_simulation_secs = getCurrentSimulationTime();
+      for(int i = 0; i <NClerks; i++){ //使用clerk
+      if(queue_status[i] == 1){queue_status[i] = -1; check = i;break;}}
+      printf("A clerk starts serving a customer: start time %.2f and  the customer ID is %d, the clerk ID %d.\n",cur_simulation_secs - st ,p_myInfo->user_id, check);
+      queue_BUS = dequeue(queue_BUS); 
+      counter --; // queue length
+      tracker ++; // track how many customer is done
+      break;
+    }else if(p_myInfo->user_id == queue_esc->id && queue_BUS == NULL){
+      cur_simulation_secs = getCurrentSimulationTime();
+      for(int i = 0; i <NClerks; i++){ //使用clerk
+      if(queue_status[i] == 1){queue_status[i] = -1; check = i;break;}}
+      printf("A clerk starts serving a customer: start time %.2f and  the customer ID is %d, the clerk ID %d.\n",cur_simulation_secs - st ,p_myInfo->user_id, check);
+      queue_esc = dequeue(queue_esc); 
+      counter --; // queue length
+      tracker ++; // track how many customer is done
+      break;
+    }
+      }
+        if(tracker == 5){ // after all clerk is used reset
+          for(int i = 0; i <NClerks; i++){
+          if(queue_status[i] == -1){queue_status[i] = 1;}
+           tracker = 0;
+           }
+         } 
