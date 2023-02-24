@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<script id="vertex-shader" type="x-shader/x-vertex">#version 300 es
+
+in vec4 vPosition;
+in vec3 vNormal;
+in vec4 vColor;
+in vec2 vTexCoord;
+
+out vec2 fTexCoord;
+out vec3 fPos;
+out vec3 fLpos; 
+out vec3 fN;
+ 
+uniform mat4 modelViewMatrix;
+uniform mat4 normalMatrix;
+uniform mat4 projectionMatrix;
+uniform vec4 lightPosition;
+
+
+void
+main()
+{
+    
+    fPos = (modelViewMatrix * vPosition).xyz;
+    fN = normalize( (normalMatrix*vec4(vNormal,0.0)).xyz);
+    fLpos = lightPosition.xyz ;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+    
+	fTexCoord = vTexCoord;
+
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">#version 300 es
+
+precision mediump float;
+
+uniform sampler2D texture1;
+uniform sampler2D texture2;
+uniform int blendTextures;
+uniform vec4 ambientProduct, diffuseProduct, specularProduct;
+uniform float shininess;
+
+in vec3 fPos ; 
+in vec3 fLpos ; 
+in vec3 fN ; 
+in vec4 fColor;
+in vec2 fTexCoord;
+
+
+layout(location=0) out vec4 fragColor ;
+
+
+vec4 ads(vec3 pos, vec3 lpos, vec3 N) {   // convert ADS from vetex shader into fragment shader
+    vec3 L = normalize(lpos- pos) ;        // also make Phong become blinn-phong
+    vec3 V = normalize(-pos) ;
+    vec3 R = reflect(-L, N) ;
+
+    vec3 E =  - normalize(pos) ;    // extra step invoke to convert Phong into blinn-phong
+    vec3 halfway = normalize(L + E); // halfway (H) = L+V/ ||L+V||
+    
+
+    vec4 ambient = ambientProduct;
+    float Kd = max( dot(halfway, N), 0.0 ); // kd = H * N 
+    vec4 diffuse = vec4(0.0, 0.0, 0.0, 1.0);
+    vec4 specular = vec4(0.0, 0.0, 0.0, 1.0); 
+    diffuse = Kd*diffuseProduct;
+
+
+
+    float Ks = pow( max(dot(R, V), 0.0), shininess );
+    specular = Ks * specularProduct;
+    if( dot(L, N) < 0.0 ) {
+        specular = vec4(0.0, 0.0, 0.0, 1.0);}
+    vec4 color = ambient + diffuse + specular;
+    color.a = 1.0 ;
+    
+    return color ;
+}   
+
+void
+main()
+{
+
+
+	if( blendTextures == 1)     // if the texture is toggle then we only display texture itself and ambient 
+    {
+		vec4 ambient = ambientProduct; // line 90 display a mix of texture color plus an ambient light
+		fragColor = mix(texture( texture1, fTexCoord ), texture( texture2, fTexCoord ), 0.5) + ambient; 
+	}
+	else
+	{
+		fragColor = ads(fPos,fLpos,fN) ; //else we display blinn-phong 
+	}
+}
+
+
+
+</script>
+
+<script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="objects.js"></script>
+<script type="text/javascript" src="main.js"></script>
+
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<br/>
+<br/>
+
+<div id="animToggleButton">
+    <input id="animToggleButton" type="button" value="Toggle Animation"
+    />
+
+</div><br/>
+
+<script>
+    //fps display 
+    var T1 = 0;
+    var count = 0;
+    var endT = 0;
+    function drawScene() {
+        var now = new Date().getTime();
+        count++;
+        T1 += (now - endT);
+        endT = now;
+        if (T1 >= 1000) {
+            fps = count;
+            count = 0;
+            T1 -= 1000;
+            document.getElementById('test').innerHTML = fps;
+        }
+    }
+    endT = new Date().getTime();
+    setInterval(drawScene, 33);
+</script>
+<div> The frame rate= <span id="test"></span></div>
+</body>
+</html>
