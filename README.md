@@ -36,4 +36,19 @@ a5 (Matlab)```Score: 100/100```
 
 a6 (Matlab)```Score: 100/100``` 
 
+## CSC305-Fall-2022 Overall Score: $\color[rgb]{1,0.3,0.4} B+$ (Introduction to Computer Graphics)
+
+a1 (Javascript & HTML)  ```Score: 93/100``` 
+
+a2 (Javascript & HTML)  ```Score: 83/100``` 
+
+a3 (C++)  ```Score: 100/100``` 
+
+## CSC360-Fall-2022 Overall Score: $\color[rgb]{1,0.3,0.4} B$ (Operating Systems)
+
+a1 (C) ```Score: 95/100``` 
+
+a2 (C) ```Score: 90/100``` 
+
+a3 (C) 
 
