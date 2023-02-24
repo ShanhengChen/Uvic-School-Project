@@ -1,0 +1,8 @@
+﻿  main.cpp
+D:\Project\VS\EllipsoidRayTracing\scene.h(38,18): warning C4099: “Ellipsoid”: 类型名称以前使用“class”现在使用的是“struct”
+D:\Project\VS\EllipsoidRayTracing\scene.h(38,8): message : 参见“Ellipsoid”的声明
+D:\Project\VS\EllipsoidRayTracing\scene.h(128,73): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+D:\Project\VS\EllipsoidRayTracing\scene.h(128,85): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+D:\Project\VS\EllipsoidRayTracing\ppm.h(4,1): warning C4005: “_CRT_SECURE_NO_WARNINGS”: 宏重定义
+D:\Project\VS\EllipsoidRayTracing\ppm.h(4,1): message : 之前在命令行上声明的“_CRT_SECURE_NO_WARNINGS”
+  EllipsoidRayTracing.vcxproj -> D:\Project\VS\EllipsoidRayTracing\x64\Debug\EllipsoidRayTracing.exe
