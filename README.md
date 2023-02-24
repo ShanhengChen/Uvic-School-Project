@@ -22,3 +22,18 @@ a2 (python) ```Score: 90/100```
 
 a3 (MySQL) ```Score: 89.33/100``` 
 
+## CSC349a-Fall-2022 (Numerical Analysis)
+
+a1 (Matlab)```Score: 90/100``` 
+
+a2 (Matlab)```Score: 85/100```
+
+a3 (Matlab)```Score: 90/100``` 
+
+a4 (Matlab)```Score: 90/100``` 
+
+a5 (Matlab)```Score: 100/100``` 
+
+a6 (Matlab)```Score: 100/100``` 
+
+
