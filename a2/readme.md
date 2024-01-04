@@ -13,3 +13,7 @@ Projects' accomplishment
 11. Quality: U will see it on screen
 12. video (1/1)
 13. readme.txt (1/1)
+
+
+https://github.com/ShanhengChen/Uvic-School-Project/assets/85982820/10ccfcea-0517-4c76-a1b0-ce1282969f04
+
